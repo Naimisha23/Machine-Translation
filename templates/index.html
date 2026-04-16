@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>English to German Translator</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Sora', sans-serif;
+      background: #f5f5f0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 2rem;
+      width: 100%;
+      max-width: 600px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1.75rem;
+    }
+
+    .lang-badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .en-badge { background: #dbeafe; color: #1e40af; }
+    .de-badge { background: #fef3c7; color: #92400e; }
+
+    .title { font-size: 20px; font-weight: 500; color: #111; }
+    .subtitle { font-size: 13px; color: #888; margin-top: 3px; }
+
+    label {
+      display: block;
+      font-size: 11px;
+      font-weight: 500;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 8px;
+    }
+
+    .input-box {
+      border: 1px solid #e5e5e5;
+      border-radius: 10px;
+      padding: 1rem;
+      margin-bottom: 12px;
+    }
+
+    textarea {
+      width: 100%;
+      border: none;
+      outline: none;
+      font-family: 'Sora', sans-serif;
+      font-size: 15px;
+      color: #111;
+      resize: none;
+      min-height: 80px;
+      line-height: 1.6;
+      background: transparent;
+    }
+
+    textarea::placeholder { color: #bbb; }
+
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .translate-btn {
+      background: #111;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 24px;
+      font-family: 'Sora', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .translate-btn:hover { background: #333; }
+
+    .clear-btn {
+      background: transparent;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-family: 'Sora', sans-serif;
+      font-size: 14px;
+      color: #666;
+      cursor: pointer;
+    }
+
+    .clear-btn:hover { background: #f9f9f9; }
+
+    #status {
+      font-size: 13px;
+      color: #888;
+    }
+
+    .output-box {
+      background: #f9f9f6;
+      border: 1px solid #e5e5e5;
+      border-radius: 10px;
+      padding: 1rem;
+      min-height: 90px;
+    }
+
+    .output-text {
+      font-size: 16px;
+      color: #111;
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    .output-placeholder {
+      font-size: 14px;
+      color: #bbb;
+      line-height: 1.7;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 13px;
+      height: 13px;
+      border: 2px solid #ddd;
+      border-top-color: #111;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+
+    <div class="header">
+      <span class="lang-badge en-badge">EN</span>
+      <span style="font-size:18px; color:#aaa;">→</span>
+      <span class="lang-badge de-badge">GR</span>
+      <div>
+        <div class="title">Machine Translator</div>
+        <div class="subtitle">English → German · LSTM Seq2Seq</div>
+      </div>
+    </div>
+
+    <div class="input-box">
+      <label>English sentence</label>
+      <textarea id="eng-input" placeholder="e.g. How are you?"></textarea>
+    </div>
+
+    <div class="btn-row">
+      <button class="translate-btn" onclick="handleTranslate()">Translate</button>
+      <button class="clear-btn" onclick="clearAll()">Clear</button>
+      <span id="status"></span>
+    </div>
+
+    <div class="output-box">
+      <label>German translation</label>
+      <div id="output-text" class="output-placeholder">Translation will appear here…</div>
+    </div>
+
+  </div>
+
+  <script>
+    async function handleTranslate() {
+      const text = document.getElementById('eng-input').value.trim();
+      if (!text) {
+        document.getElementById('status').textContent = 'Please enter a sentence.';
+        return;
+      }
+
+      const out = document.getElementById('output-text');
+      const status = document.getElementById('status');
+
+      out.className = 'output-placeholder';
+      out.textContent = '';
+      status.innerHTML = '<span class="spinner"></span>Translating…';
+
+      try {
+        const res = await fetch('/translate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text })
+        });
+
+        const data = await res.json();
+
+        if (data.error) {
+          out.textContent = 'Error: ' + data.error;
+        } else {
+          out.className = 'output-text';
+          out.textContent = data.translation;
+        }
+        status.textContent = '';
+
+      } catch (e) {
+        out.textContent = 'Cannot reach server. Is app.py running?';
+        status.textContent = '';
+      }
+    }
+
+    function clearAll() {
+      document.getElementById('eng-input').value = '';
+      document.getElementById('output-text').className = 'output-placeholder';
+      document.getElementById('output-text').textContent = 'Translation will appear here…';
+      document.getElementById('status').textContent = '';
+    }
+
+    document.getElementById('eng-input').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        handleTranslate();
+      }
+    });
+  </script>
+
+</body>
+</html>

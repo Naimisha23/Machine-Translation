@@ -1,0 +1,133 @@
+hello	hallo
+hi	hallo
+good morning	guten morgen
+good afternoon	guten tag
+good evening	guten abend
+good night	gute nacht
+
+how are you	wie geht es dir
+i am fine	mir geht es gut
+i am happy	ich bin glücklich
+i am sad	ich bin traurig
+i am tired	ich bin müde
+
+what is your name	wie heißt du
+my name is john	ich heiße john
+nice to meet you	freut mich dich kennenzulernen
+
+where are you	wo bist du
+where are you from	woher kommst du
+i am from india	ich komme aus indien
+
+thank you	danke
+thanks a lot	vielen dank
+you are welcome	bitte
+sorry	es tut mir leid
+
+i love you	ich liebe dich
+i like you	ich mag dich
+i miss you	ich vermisse dich
+
+what are you doing	was machst du
+i am working	ich arbeite
+i am studying	ich lerne
+i am sleeping	ich schlafe
+
+do you speak english	sprichst du englisch
+yes	ja
+no	nein
+
+come here	komm her
+go there	geh dorthin
+sit down	setz dich
+stand up	steh auf
+
+open the door	öffne die tür
+close the door	schließe die tür
+
+i am hungry	ich habe hunger
+i am thirsty	ich habe durst
+
+let's go	lass uns gehen
+wait here	warte hier
+stop it	hör auf
+
+good job	gute arbeit
+well done	gut gemacht
+
+i need help	ich brauche hilfe
+help me	hilf mir
+
+where is the bathroom	wo ist die toilette
+where is the station	wo ist der bahnhof
+
+this is good	das ist gut
+this is bad	das ist schlecht
+
+i understand	ich verstehe
+i don't understand	ich verstehe nicht
+
+see you later	bis später
+goodbye	auf wiedersehen
+bye	tschüss
+
+# -------- grammar patterns --------
+
+i eat food	ich esse essen
+you eat food	du isst essen
+he eats food	er isst essen
+she eats food	sie isst essen
+we eat food	wir essen essen
+they eat food	sie essen essen
+
+i drink water	ich trinke wasser
+you drink water	du trinkst wasser
+he drinks water	er trinkt wasser
+we drink water	wir trinken wasser
+
+i see you	ich sehe dich
+you see me	du siehst mich
+
+i like music	ich mag musik
+you like music	du magst musik
+he likes music	er mag musik
+
+i love music	ich liebe musik
+we love music	wir lieben musik
+
+i want food	ich will essen
+you want food	du willst essen
+he wants food	er will essen
+
+i have a book	ich habe ein buch
+you have a book	du hast ein buch
+he has a book	er hat ein buch
+
+i need help	ich brauche hilfe
+you need help	du brauchst hilfe
+
+i go home	ich gehe nach hause
+you go home	du gehst nach hause
+he goes home	er geht nach hause
+
+i read a book	ich lese ein buch
+you read a book	du liest ein buch
+
+i write a letter	ich schreibe einen brief
+you write a letter	du schreibst einen brief
+
+this is my book	das ist mein buch
+that is your book	das ist dein buch
+
+what do you want	was willst du
+i want water	ich will wasser
+
+what time is it	wie spät ist es
+it is morning	es ist morgen
+
+i am a student	ich bin student
+you are a teacher	du bist lehrer
+he is a doctor	er ist arzt
+
+please help me	bitte hilf mir
+please wait here	bitte warte hier
